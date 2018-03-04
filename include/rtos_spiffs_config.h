@@ -11,14 +11,12 @@
 // ----------- 8< ------------
 // Following includes are for the linux test build of spiffs
 // These may/should/must be removed/altered/replaced in your target
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <unistd.h>
+#include <espressif/esp_libc.h>
+#include <espressif/c_types.h>
+#include <espressif/esp_misc.h>
 // ----------- >8 ------------
+
+// compile time switches
 
 // Set generic spiffs debug output call.
 #ifndef SPIFFS_DBG
@@ -41,14 +39,7 @@
 #define SPIFFS_API_DBG(_f, ...) //printf(_f, ## __VA_ARGS__)
 #endif
 
-// needed types
-typedef int16_t file_t;
-typedef int32_t s32_t;
-typedef uint32_t u32_t;
-typedef int16_t s16_t;
-typedef uint16_t u16_t;
-typedef int8_t s8_t;
-typedef uint8_t u8_t;
+
 
 // Defines spiffs debug print formatters
 // some general signed number
