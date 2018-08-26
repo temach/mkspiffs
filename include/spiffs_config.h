@@ -286,7 +286,7 @@ typedef uint8_t u8_t;
 // directly. If all available descriptors become opened, all cache memory is
 // lost.
 #ifndef SPIFFS_TEMPORAL_FD_CACHE
-#define SPIFFS_TEMPORAL_FD_CACHE              0
+#define SPIFFS_TEMPORAL_FD_CACHE              1
 #endif
 
 // Temporal file cache hit score. Each time a file is opened, all cached files
