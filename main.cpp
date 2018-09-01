@@ -154,17 +154,19 @@ int addFile(char* name, const char* path)
         std::cout << "file size: " << size << std::endl;
     }
 
+    size_t read = 0;
+    uint8_t datas[4096];
     size_t left = size;
-    uint8_t data_byte;
     while (left > 0) {
-        if (1 != fread(&data_byte, 1, 1, src)) {
+        read = fread(&datas, 1, 4096, src);
+        if (read  <= 0) {
             std::cerr << "fread error!" << std::endl;
 
             fclose(src);
             SPIFFS_close(&s_fs, dst);
             return 1;
         }
-        int res = SPIFFS_write(&s_fs, dst, &data_byte, 1);
+        int res = SPIFFS_write(&s_fs, dst, &datas, read);
         if (res < 0) {
             std::cerr << "SPIFFS_write error(" << s_fs.err_code << "): ";
 
@@ -183,7 +185,7 @@ int addFile(char* name, const char* path)
             SPIFFS_close(&s_fs, dst);
             return 1;
         }
-        left -= 1;
+        left -= read;
     }
 
     SPIFFS_close(&s_fs, dst);
@@ -718,7 +720,7 @@ static int checkArgs()
     }
 
     if (s_imageSize % s_blockSize != 0) {
-        std::cerr << "error: Image size should be a multiple of block size" << std::endl;
+        std::cerr << "error: Image size (" << s_imageSize << ") should be a multiple of block size (" << s_blockSize << ")" << std::endl;
         return 1;
     }
 
