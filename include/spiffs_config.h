@@ -95,12 +95,12 @@ typedef uint8_t u8_t;
 // Enables/disable memory read caching of nucleus file system operations.
 // If enabled, memory area must be provided for cache in SPIFFS_mount.
 #ifndef  SPIFFS_CACHE
-#define SPIFFS_CACHE                    0
+#define SPIFFS_CACHE                    1
 #endif
 #if SPIFFS_CACHE
 // Enables memory write caching for file descriptors in hydrogen
 #ifndef  SPIFFS_CACHE_WR
-#define SPIFFS_CACHE_WR                 0
+#define SPIFFS_CACHE_WR                 1
 #endif
 
 // Enable/disable statistics on caching. Debug/test purpose only.
@@ -122,7 +122,7 @@ typedef uint8_t u8_t;
 
 // Enable/disable statistics on gc. Debug/test purpose only.
 #ifndef SPIFFS_GC_STATS
-#define SPIFFS_GC_STATS                 1
+#define SPIFFS_GC_STATS                 0
 #endif
 
 // Garbage collecting examines all pages in a block which and sums up
